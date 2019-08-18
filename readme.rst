@@ -8,7 +8,9 @@ Project Directory Tree
 
   readme.rst               % readme
   LICENSE
-  cmod/                    % your c reference model
+  cmod/                    
+  ├── eyeriss_v1           % eyeriss_v1 ref_C_code 
+  └── simple_cnn           % simple_cnn
   vmod/                    % verilog model
   ├── cnnip_v1_0.v         % top module
   ├── cnnip_v1_0_S00_AXI.v % AXI4-lite slave interface
