@@ -20,6 +20,12 @@ wire Enable_to_PE;
 wire Ready_to_Bus;
 wire [31:0] value_to_PE;
 
+wire    weight_wea_to_PE;
+wire    ifmap_wea_to_PE;
+wire    psum_wea_to_PE;
+
+wire output_Psum;
+
 always #5 clk = ~clk;
 
 
@@ -64,7 +70,6 @@ begin
     end;
     value_from_Bus=1;
     weight_wea_from_Host=1;
-    
     repeat(5) 
     begin
         @(posedge clk)
@@ -82,7 +87,6 @@ begin
     Tag_from_Bus=30;
     
     ifmap_wea_from_Host=1;
-    
     value_from_Bus=1;
     repeat(35) 
     begin
@@ -93,7 +97,7 @@ begin
     end;
     ifmap_wea_from_Host=0;
     
-    repeat(100) @(posedge clk);
+    repeat(300) @(posedge clk);
     
     
     $finish;

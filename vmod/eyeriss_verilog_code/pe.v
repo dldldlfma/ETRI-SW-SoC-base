@@ -72,7 +72,7 @@ module pe(
                         begin
                             state<=IDLE;
                         end
-                        else if(weight_fifo_full && ifmap_fifo_full)
+                        else if(weight_fifo_full && ifmap_fifo_full && ~ifmap_wea && ~weight_wea)
                         begin
                             state<=LOAD;
                         end
@@ -204,17 +204,26 @@ module pe(
             begin
                 if(state == LOAD)
                 begin
-                    if(counter<=31)
+                    if(counter<=32)
                     begin
-                        if(counter<=2)
+                        
+                        if(counter==0) begin end
+                        else if(counter<=3)
                         begin
-                            weight[counter] <= weight_fifo_dout;
+                            weight[counter-1] <= weight_fifo_dout;
                         end
-                        ifmap[counter] <= ifmap_fifo_dout;
+                        
+                        if(counter==0)begin end
+                        else
+                        begin
+                            ifmap[counter-1] <= ifmap_fifo_dout;
+                        end
+                        
                         counter<=counter+1;
                     end
                 end
-                if(state ==CALC)
+                
+                else if(state ==CALC)
                 begin
                     if(counter >= 32)
                     begin
